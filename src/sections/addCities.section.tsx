@@ -12,7 +12,7 @@ const AddCitiesSection = () => {
   );
   const [routeCommand, setRouteCommand] = useState("");
   const [routeLength, setRouteLength] = useState("0");
-  const { addRoute, addMultipleRoutes, cities } = useTrains();
+  const { addRoute, addMultipleRoutes } = useTrains();
   return (
     <GS.StyledFlexContainer>
       <GS.StyledContainer>
@@ -23,18 +23,7 @@ const AddCitiesSection = () => {
         />
         <Button
           label="Create Multiple Route"
-          onClick={() => {
-            const mrc = multipleRouteCommands.split(",");
-            console.log("multipleRouteCommands: ", mrc);
-            for (let index = 0; index < mrc.length; index++) {
-              const frc = mrc[index];
-              const commandCities = frc.trim().split("");
-              const routeCommand =
-                commandCities[0].trim() + commandCities[1].trim();
-              const routeLength = commandCities[2].trim();
-              addRoute(routeCommand, routeLength);
-            }
-          }}
+          onClick={() => addMultipleRoutes(multipleRouteCommands)}
         />
         <GS.StyledFlexContainerNoBorder>
           <Typography type="p" text="or create a single Route" />
