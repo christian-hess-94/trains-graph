@@ -41,17 +41,68 @@ export const TrainsProvider: React.FC = ({ children }) => {
     }
     return null;
   };
+  const checkIfCityExistsLocally = (
+    cityName: string,
+    existingCities: City[]
+  ): City | null => {
+    const city = existingCities.filter((city) => city.name === cityName);
+    if (city.length) {
+      return city[0];
+    }
+    return null;
+  };
 
   const addMultipleRoutes = (s: string) => {
-    const mrc = s.split(",");
-    console.log("multipleRouteCommands: ", mrc);
-    for (let index = 0; index < mrc.length; index++) {
-      const frc = mrc[index];
-      const commandCities = frc.trim().split("");
-      const routeCommand = commandCities[0].trim() + commandCities[1].trim();
-      const routeLength = commandCities[2].trim();
-      addRoute(routeCommand, routeLength);
-    }
+    const multipleRouteCommands = s.split(",");
+    const newCities = [...cities];
+    multipleRouteCommands.forEach((routeCommand) => {
+      const trimmedRouteCommand = routeCommand.trim().split("");
+      const from = trimmedRouteCommand[0];
+      const to = trimmedRouteCommand[1];
+      const distance = parseInt(trimmedRouteCommand[2]);
+      console.group(routeCommand);
+      if (from === to || distance === 0 || trimmedRouteCommand.length > 3) {
+        console.log("Invalid Route");
+        console.groupEnd();
+        return;
+      }
+
+      let existingCity = checkIfCityExistsLocally(from, newCities);
+      if (!existingCity) {
+        console.log(
+          from +
+            " city doesnt exist, creating it and the route to:" +
+            to +
+            " with distance: " +
+            distance
+        );
+        newCities.push({ name: from, routes: [{ from, to, distance }] });
+        console.groupEnd();
+        return;
+      }
+      console.log(from + " City exists, continuing");
+
+      const cityIndex = newCities.indexOf(existingCity);
+      console.log(from + " cityIndex: ", cityIndex);
+      const existingRoute = existingCity.routes.filter((route) => {
+        return route.to === to;
+      });
+      if (existingRoute.length) {
+        console.log("Route already exists");
+        console.groupEnd();
+        return;
+      }
+      console.log(from + " Route to:" + to + " doesnt exist, creating");
+      const newExistingRoutes = [...existingCity.routes];
+      newExistingRoutes.push({ from, to, distance });
+      console.log(from + " newExistingRoutes: ", newExistingRoutes);
+      existingCity.routes = newExistingRoutes;
+      newCities.splice(cityIndex, 1, existingCity);
+      console.table(newCities);
+      console.groupEnd();
+    });
+    setCities(newCities);
+    // console.log({ currentCities, multipleRouteCommands });
   };
 
   const addRoute = (routeCommand: string, routeLength: string) => {
