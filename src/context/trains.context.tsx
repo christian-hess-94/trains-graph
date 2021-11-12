@@ -16,12 +16,14 @@ export interface TrainsContextData {
   addRoute: (s: string, l: string) => void;
   addMultipleRoutes: (mr: string) => void;
   calculateRouteDistance: (c: string) => number;
+  calculateCtoCTrips: (stops: number) => void;
 }
 
 const DEFAULT_TRAINS_CONTEXT_DATA: TrainsContextData = {
   cities: [],
   addRoute: () => null,
   addMultipleRoutes: () => null,
+  calculateCtoCTrips: () => null,
   calculateRouteDistance: () => 0,
 };
 
@@ -172,9 +174,48 @@ export const TrainsProvider: React.FC = ({ children }) => {
     return totalDistance;
   };
 
+  const calculateCtoCTrips = (stops: number) => {
+    console.clear();
+    const cityC = cities.filter((city) => city.name === "C")[0];
+
+    const ditance = cToCStep(cityC, stops);
+    console.log("ditance: ", ditance);
+  };
+
+  const cToCStep = (cityToCheck: City, stops_remaining: number): number => {
+    console.group(`[${stops_remaining}]${cityToCheck.name}`);
+    let accumulatedDistance = 0;
+    cityToCheck.routes.forEach((route) => {
+      const cityRoute = cities.filter((city) => city.name === route.to)[0];
+      if (stops_remaining === 0) {
+        console.log("No more stops available");
+        return 0;
+      }
+      if (cityRoute.name === "C") {
+        console.log(
+          `[${cityToCheck.name} -> ${cityRoute.name}] distance: ${route.distance}`
+        );
+        console.groupEnd();
+        return route.distance;
+      }
+      accumulatedDistance = cToCStep(cityRoute, stops_remaining - 1);
+      console.log(
+        `[${cityToCheck.name} -> ${route.to}]accumulatedDistance: ${accumulatedDistance}`
+      );
+    });
+    console.groupEnd();
+    return accumulatedDistance;
+  };
+
   return (
     <Provider
-      value={{ cities, addMultipleRoutes, addRoute, calculateRouteDistance }}
+      value={{
+        cities,
+        addMultipleRoutes,
+        addRoute,
+        calculateRouteDistance,
+        calculateCtoCTrips,
+      }}
     >
       {children}
     </Provider>

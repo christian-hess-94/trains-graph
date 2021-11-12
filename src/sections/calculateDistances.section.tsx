@@ -5,7 +5,7 @@ import TextInput from "../components/TextInput";
 import useTrains from "../context/trains.context";
 
 const CalculateDistancesSection = () => {
-  const { calculateRouteDistance } = useTrains();
+  const { calculateRouteDistance, calculateCtoCTrips } = useTrains();
   const [cityString, setCityString] = useState("ABC");
   return (
     <GS.StyledFlexContainer>
@@ -16,10 +16,14 @@ const CalculateDistancesSection = () => {
           changeValue={setCityString}
         />
         <Button
-          label="Test"
+          label="Calculate"
           onClick={() => calculateRouteDistance(cityString)}
         />
       </GS.StyledContainer>
+      <Button
+        label="CalculateC to C (max 3 stops) "
+        onClick={() => calculateCtoCTrips(3)}
+      />
     </GS.StyledFlexContainer>
   );
 };

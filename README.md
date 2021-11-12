@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+# How to install and run
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Install NodeJS and yarn
+1. Run the "yarn" command to install dependencies
+1. After the installation is finished, run "yarn start" to run the project on port 3000
 
-## Available Scripts
+## Explanation
 
-In the project directory, you can run:
+- This project allows the user to create cities and connecting routes between them, with specified distances.
 
-### `yarn start`
+- The user can create a route by executing a command that uses the following pattern:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`CITYNAMECITYNAMEDISTANCE`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Currently the user can create a single route, or multiple routes by adding them separated by commas (,) in the specified text fields.
 
-### `yarn test`
+- The program detects if the user is trying to add an already existing route
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The program detects if the user is trying to add an invalid route
 
-### `yarn build`
+- If the first citie's name doesn't exist, the city is created first before the route itself is created
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The status list below the inputs shows all the cities and their routes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Routes only go one way (a route from A to C with distance 5 doesn't entail in a route from C to A with distance 5. the second route must be created manually)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- The program is able to calculate a route between multiple cities.
 
-### `yarn eject`
+- The program can detect if a route through multiple cities is invalid
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- The calculate C to C feaature is incomplete. It's a recursive program that calculates all routes going from C back to C, with a maximum of 3 stops. It currently logs part of the solution to the console.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The project uses the ContextAPI to all the values that are shared in the entire application. There is one context:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- The Trains Context has all the logic for adding cities and their routes aswell as calculating a multiple city route.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+All styles and components were custom made using styled-components. The project uses flexbox for positioning.
