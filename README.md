@@ -4,6 +4,8 @@
 1. Run the "yarn" command to install dependencies
 1. After the installation is finished, run "yarn start" to run the project on port 3000
 
+You can see this project working at it's corresponding [Github Page](https://christian-hess-94.github.io/trains-graph)
+
 ## Explanation
 
 - This project allows the user to create cities and connecting routes between them, with specified distances.
