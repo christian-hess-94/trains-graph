@@ -22,7 +22,7 @@ const AddCitiesSection = () => {
           value={multipleRouteCommands}
         />
         <Button
-          label="Create Multiple Route"
+          label="Create Multiple Routes"
           onClick={() => addMultipleRoutes(multipleRouteCommands)}
         />
         <GS.StyledFlexContainerNoBorder>
