@@ -1,5 +1,5 @@
 import React from "react";
-import { City, Route } from "../../context/trains.context";
+import { Route } from "../../context/trains.context";
 import * as GS from "../../global-styles";
 import Typography from "../typography";
 

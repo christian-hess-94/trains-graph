@@ -1,9 +1,5 @@
-import * as GS from "../global-styles";
-import React, { useState } from "react";
-import Button from "../components/button";
-import TextInput from "../components/TextInput";
+import React from "react";
 import useTrains from "../context/trains.context";
-import Typography from "../components/typography";
 import CityListItem from "../components/cityListItem";
 import * as S from "./styles";
 const SeeCitiesSection = () => {
