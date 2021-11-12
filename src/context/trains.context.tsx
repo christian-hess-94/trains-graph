@@ -15,7 +15,7 @@ export interface TrainsContextData {
   cities: City[];
   addRoute: (s: string, l: string) => void;
   addMultipleRoutes: (mr: string) => void;
-  calculateRouteDistance: (f: string, t: string) => number;
+  calculateRouteDistance: (c: string) => number;
 }
 
 const DEFAULT_TRAINS_CONTEXT_DATA: TrainsContextData = {
@@ -138,8 +138,38 @@ export const TrainsProvider: React.FC = ({ children }) => {
     setCities(newCities);
   };
 
-  const calculateRouteDistance = (from: string, to: string): number => {
-    return 0;
+  const calculateRouteDistance = (cityString: string): number => {
+    const citiesArray = cityString.split("");
+    let totalDistance = 0;
+    let routeIsValid = true;
+    citiesArray.forEach((cityName, cityIndex) => {
+      const selectedCity = cities.filter((city) => city.name === cityName)[0];
+      if (!selectedCity) {
+        alert(`${cityName} doesn't exist!`);
+        routeIsValid = false;
+        return;
+      }
+      let nextCity = "";
+      if (cityIndex < citiesArray.length - 1) {
+        nextCity = citiesArray[cityIndex + 1];
+      } else {
+        return;
+      }
+      const selectedRoute = selectedCity.routes.filter(
+        (route) => route.to === nextCity
+      )[0];
+      if (!selectedRoute) {
+        alert(`Route from ${cityName} to ${nextCity} doesn't exist!`);
+        routeIsValid = false;
+        return;
+      }
+      totalDistance += selectedRoute.distance;
+    });
+    if (!routeIsValid) {
+      return 0;
+    }
+    alert(totalDistance);
+    return totalDistance;
   };
 
   return (

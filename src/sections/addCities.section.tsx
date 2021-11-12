@@ -14,7 +14,7 @@ const AddCitiesSection = () => {
   const [routeLength, setRouteLength] = useState("0");
   const { addRoute, addMultipleRoutes } = useTrains();
   return (
-    <GS.StyledFlexContainer>
+    <>
       <GS.StyledContainer>
         <TextArea
           label="Multiple Commands (separated by ,)"
@@ -49,7 +49,7 @@ const AddCitiesSection = () => {
           onClick={() => addRoute(routeCommand, routeLength)}
         />
       </GS.StyledContainer>
-    </GS.StyledFlexContainer>
+    </>
   );
 };
 
