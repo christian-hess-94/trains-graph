@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/trains-graph/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/trains-graph/static/js/main.725187c8.chunk.js",
+    "main.js.map": "/trains-graph/static/js/main.725187c8.chunk.js.map",
+    "runtime-main.js": "/trains-graph/static/js/runtime-main.f480c45c.js",
+    "runtime-main.js.map": "/trains-graph/static/js/runtime-main.f480c45c.js.map",
+    "static/js/2.121c6919.chunk.js": "/trains-graph/static/js/2.121c6919.chunk.js",
+    "static/js/2.121c6919.chunk.js.map": "/trains-graph/static/js/2.121c6919.chunk.js.map",
+    "static/js/3.3de53e59.chunk.js": "/trains-graph/static/js/3.3de53e59.chunk.js",
+    "static/js/3.3de53e59.chunk.js.map": "/trains-graph/static/js/3.3de53e59.chunk.js.map",
+    "index.html": "/trains-graph/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/trains-graph/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.121c6919.chunk.js.LICENSE.txt": "/trains-graph/static/js/2.121c6919.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f480c45c.js",
+    "static/js/2.121c6919.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.725187c8.chunk.js"
+  ]
+}
